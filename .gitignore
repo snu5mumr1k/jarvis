@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Everyone's got their own .gitignore
+.gitignore
