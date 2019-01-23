@@ -1,33 +1,17 @@
-#include <iostream>
-#include <string>
-
-class TJarvis {
-public:
-    struct TParams {
-        std::string LordName;
-    };
-
-    TJarvis(const TParams& params);
-
-    void SayHi() const;
-
-private:
-    std::string LordName;
-};
-
-TJarvis::TJarvis(const TJarvis::TParams& params)
-    : LordName(params.LordName)
-{
-}
-
-void TJarvis::SayHi() const {
-    std::cout << "Hi, " << LordName << "! I'm Jarvis" << std::endl;
-}
+#include <core/jarvis.h>
+#include <core/events_dealer.h>
+#include <sources/commands.h>
 
 int main() {
-    TJarvis jarvis({"Andru"});
+    TEventsDealer dealer;
+    TCommandsSource commandsSource;
+
+    dealer.AddSource(&commandsSource);
+
+    TJarvis jarvis({"Andru"}, &dealer);
 
     jarvis.SayHi();
+    jarvis.MainLoop();
 
     return 0;
 }
